@@ -48,7 +48,7 @@ export class AppComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.frm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       surname: ['', []],
       email: ['', []],
       tel: ['', []],
@@ -61,6 +61,7 @@ export class AppComponent {
   }
 
   onSubmit() {
+    console.log(this.frm.valid);
     console.log(this.frm.value);
   }
 
