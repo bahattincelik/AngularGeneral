@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductService } from './productservice';
+import { ProductService, LoggerService } from './productservice';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  providers:[],
+  providers:[ProductService, LoggerService],
  // templateUrl: './app.component.html',
  template:`
  
@@ -16,8 +16,12 @@ import { ProductService } from './productservice';
  `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+/*export class AppComponent {
  constructor(private productService: ProductService){
   console.log(productService.getProducts());
- }
+ }*/
+ export class AppComponent {
+  constructor(@Inject(ProductService) private productService){
+   console.log(productService.getProducts());
+  }
 }
