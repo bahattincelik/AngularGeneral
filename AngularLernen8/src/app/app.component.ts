@@ -5,13 +5,15 @@ import { productServiceIT } from './injection-token';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
+import { RandomService } from './random.service';
+import { AComponent } from './a.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AComponent],
   providers: [
-    provideHttpClient(), // `importProvidersFrom` yerine `provideHttpClient()` doğrudan kullanıldı
+ // `importProvidersFrom` yerine `provideHttpClient()` doğrudan kullanıldı
 
     //ProductService, LoggerService
 
@@ -26,7 +28,7 @@ import { provideHttpClient } from '@angular/common/http';
       return "hallo";
     }}*/
 
-    { provide: LoggerService, useClass: LoggerService },
+    /*{ provide: LoggerService, useClass: LoggerService },
     {
       provide: "productService",
       useFactory: (httpClient: HttpClient, loggerService: LoggerService) => {
@@ -39,11 +41,13 @@ import { provideHttpClient } from '@angular/common/http';
         });
       },
       deps: [HttpClient, LoggerService] // Bağımlılıkları sağladık
-    }
+    }*/
   ], // DI Token - Default Type Token
   // templateUrl: './app.component.html',
   template: `
- 
+ AppComponent => {{randomService.random}}
+ <br>
+ <app-a></app-a>
   `,
   styleUrl: './app.component.scss'
 })
@@ -70,10 +74,16 @@ import { provideHttpClient } from '@angular/common/http';
 }*/
 
 export class AppComponent {
-  products = [];
 
-  constructor(@Inject("productService") private productService: ProductService) {
+
+ constructor(public randomService: RandomService){}
+
+  //products = [];
+
+  /*constructor(public randomService: RandomService, @Inject("productService") private productService: ProductService) {
     this.products = productService.getProducts();
     console.log(this.products);
-  }
+  }*/
+
+
 }
