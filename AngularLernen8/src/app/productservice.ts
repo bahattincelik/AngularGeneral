@@ -59,8 +59,8 @@ export class ProductService {
 }
 
 export class Product {
-  name: string;
-  quantity: number;
+  name: string="Product";
+  quantity: number=1;
 }
 
 @Injectable()
