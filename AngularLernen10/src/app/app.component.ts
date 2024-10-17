@@ -13,13 +13,13 @@ import { routes } from './routes/routes';
  
  <a routerLink="products">Products</a> <br>
  <router-outlet></router-outlet>
- <!--<a routerLink="home" routerLinkActive="active">Home</a> | 
+ <a routerLink="home" routerLinkActive="active">Home</a> |  <a routerLink="dashboard" routerLinkActive="active">Dashboard</a> | 
  <a routerLink="about" routerLinkActive="active">About</a> | 
  <a routerLink="contact" routerLinkActive="active">Contact</a> <br>
  <hr>
  
  <br>
- <button (click) ="go()">Go</button>-->
+ <button (click) ="go()">Go</button>
  
  `,
   styles: [".active{color:green;background-color:yellow}"]

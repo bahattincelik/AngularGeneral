@@ -9,10 +9,21 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProductOverviewComponent } from './components/product-overview/product-overview.component';
 
 import { ProductSpecComponent } from './components/product-spec/product-spec.component';
+import { canActivateChildGuard, canActivateGuard, canDeactivateGuard, isAdminGuard, resolveGuard, isUserGuard } from './guards/guards';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/user/user.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    {path: "products", component: ProductsComponent, children: [
+    
+   
+   {path: "home", component:HomeComponent},
+    {path: "home/:id", component:HomeComponent},
+    {path: "about", component:AboutComponent},
+    {path: "dashboard", component: AdminComponent, canMatch : [isAdminGuard]},
+    {path: "dashboard", component: UserComponent, canMatch : [isUserGuard]},
+    {path: "contact", component:ContactComponent},
+    {path: "products", component: ProductsComponent, canActivate: [canActivateGuard], canActivateChild: [canActivateChildGuard], canDeactivate : [canDeactivateGuard], resolve:{photos:resolveGuard}, children: [
         {path: ":detail/:id", component: ProductDetailComponent, children: [
             {path: "", redirectTo: "overview", pathMatch: "full"},
             {path: "overview", component: ProductOverviewComponent},
@@ -23,11 +34,6 @@ export const routes: Routes = [
         }
     ]
     },
-   
-   /* {path: "home", component:HomeComponent},
-    {path: "home/:id", component:HomeComponent},
-    {path: "about", component:AboutComponent},
-    {path: "contact", component:ContactComponent},*/
 
     {path: "**", component:ErrorComponent}
 ];
