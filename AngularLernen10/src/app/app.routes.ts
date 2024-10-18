@@ -23,7 +23,7 @@ export const routes: Routes = [
     {path: "dashboard", component: AdminComponent, canMatch : [isAdminGuard]},
     {path: "dashboard", component: UserComponent, canMatch : [isUserGuard]},
     {path: "contact", component:ContactComponent},
-    {path: "products", component: ProductsComponent, canActivate: [canActivateGuard], canActivateChild: [canActivateChildGuard], canDeactivate : [canDeactivateGuard], resolve:{photos:resolveGuard}, children: [
+    {path: "products", component: ProductsComponent, data: {key1: 'value1', key2: 'value2'}, canActivate: [canActivateGuard], canActivateChild: [canActivateChildGuard], canDeactivate : [canDeactivateGuard], resolve:{photos:resolveGuard}, children: [
         {path: ":detail/:id", component: ProductDetailComponent, children: [
             {path: "", redirectTo: "overview", pathMatch: "full"},
             {path: "overview", component: ProductOverviewComponent},
