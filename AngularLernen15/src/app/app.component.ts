@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -10,9 +10,13 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   constructor(private httpClient: HttpClient) {
-    httpClient.get('https://jsonplaceholder.typicode.com/posts').subscribe({
-      next: (datas) => console.log(datas),
-      error: (error) => console.log(error),
-    });
+    var params = new HttpParams().set('id', '1');
+
+    httpClient
+      .get('https://jsonplaceholder.typicode.com/posts', { params })
+      .subscribe({
+        next: (datas) => console.log(datas),
+        error: (error) => console.log(error),
+      });
   }
 }
